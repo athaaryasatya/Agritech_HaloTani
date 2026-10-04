@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('template_prompts', function (Blueprint $table) {
+        Schema::create('template_prompt', function (Blueprint $table) {
             $table->string('id_template', 50)->primary();
             $table->string('id_petani', 50)->nullable();
             $table->text('isi_template');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('template_prompts');
+        Schema::dropIfExists('template_prompt');
     }
 };

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('kontak', 20)->nullable();
             $table->text('alamat')->nullable();
-            $table->timestamps('created_at')->nullable()->useCurrent();
+            $table->timestamp('created_at')->nullable()->useCurrent();
             $table->string('role', 20)->default('petani'); // 'admin' atau 'petani'
             $table->rememberToken();
 
