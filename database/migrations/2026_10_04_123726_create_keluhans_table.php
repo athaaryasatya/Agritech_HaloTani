@@ -15,8 +15,7 @@ return new class extends Migration
             $table->string('id_keluhan', 50)->primary();
             $table->string('id_petani', 50);
 
-            $table->string('jenis_tanaman', 50);
-            $table->string('urgensi', 20);
+            $table->string('jenis_tanaman', 50)
 
             $table->text('teks_keluhan');
             $table->date('tanggal');
