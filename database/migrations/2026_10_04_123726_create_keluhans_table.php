@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('keluhan', function (Blueprint $table) {
-            $table->string('id_keluhan', 10)->primary();
+            $table->string('id_keluhan', 50)->primary();
             $table->string('id_petani', 50);
+
+            $table->string('jenis_tanaman', 50);
+            $table->string('urgensi', 20);
+
             $table->text('teks_keluhan');
             $table->date('tanggal');
             $table->string('status', 20)->nullable()->default('pending');
