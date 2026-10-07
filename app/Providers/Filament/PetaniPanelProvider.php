@@ -18,6 +18,8 @@ use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Filament\Pages\Auth\EditProfile;
+use App\Filament\Pages\Auth\RegisterPetani;
 
 class PetaniPanelProvider extends PanelProvider
 {
@@ -28,6 +30,9 @@ class PetaniPanelProvider extends PanelProvider
             ->id('petani')
             ->path('petani')
             ->login()
+            ->registration(RegisterPetani::class)
+            ->profile(EditProfile::class)
+            ->passwordReset()
             ->colors([
                 'primary' => Color::Amber,
             ])
