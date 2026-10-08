@@ -101,8 +101,8 @@ php artisan serve
 
 | Peran | Email | Kata sandi |
 |---|---|---|
-| Petani | budi@agritech.test | `<isi sesuai database/seeders/PetaniSeeder.php>` |
-| Admin | admin@agritech.test | `<isi sesuai database/seeders/PetaniSeeder.php>` |
+| Petani | budi@agritech.test | `sandi= password123`  |
+| Admin | admin@agritech.test | `sandi= password123` |
 
 Pendaftar baru lewat `/petani/register` otomatis berperan petani.
 Panel admin belum dibuat, jadi akun admin belum punya halaman sendiri.
