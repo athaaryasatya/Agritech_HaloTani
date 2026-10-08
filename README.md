@@ -1,58 +1,273 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Agritech Assistant (HaloTani)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi konsultasi keluhan petani dengan bantuan layanan AI. Petani menulis
+keluhan tanamannya, lalu sistem memberi analisis dan rekomendasi penanganan.
 
-## About Laravel
+Proyek kelas 2-A, Politeknik Negeri Madiun.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Teknologi:** PHP 8.3, Laravel 13, Filament 5, MySQL, Livewire, Tailwind CSS.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Daftar Isi
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. [Prasyarat](#1-prasyarat)
+2. [Menjalankan proyek pertama kali](#2-menjalankan-proyek-pertama-kali)
+3. [Akun uji coba](#3-akun-uji-coba)
+4. [Setelah git pull](#4-setelah-git-pull)
+5. [Peta folder](#5-peta-folder)
+6. [Menambah fitur dengan Filament](#6-menambah-fitur-dengan-filament)
+7. [Aturan kerja Git](#7-aturan-kerja-git)
+8. [Catatan untuk tiap peran](#8-catatan-untuk-tiap-peran)
+9. [Masalah yang sering muncul](#9-masalah-yang-sering-muncul)
+10. [Status fitur](#10-status-fitur)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 1. Prasyarat
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Laragon (berisi PHP 8.3, MySQL, Composer, dan Node.js)
+- Git
+- VS Code atau editor lain
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+Cek versi di terminal:
 
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```
+php -v
+composer -V
+node -v
+git --version
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+PHP harus 8.3 atau lebih baru.
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 2. Menjalankan proyek pertama kali
 
-## Code of Conduct
+1. Buka Laragon, klik **Start All**. MySQL harus berjalan.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. Ambil kode:
 
-## Security Vulnerabilities
+```
+cd C:\laragon\www
+git clone <alamat-repositori>
+cd Agritech_HaloTani
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+3. Pasang paket:
 
-## License
+```
+composer install
+npm install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. Buat file pengaturan pribadi, lalu buat kunci aplikasi:
+
+```
+copy .env.example .env
+php artisan key:generate
+```
+
+5. Buat database kosong:
+   - Buka `http://localhost/phpmyadmin`.
+   - Tab **Databases**, isi nama `halotani_db`, collation `utf8mb4_unicode_ci`, klik **Create**.
+
+6. Buka file `.env`, pastikan isinya:
+
+```
+DB_DATABASE=halotani_db
+DB_USERNAME=root
+DB_PASSWORD=
+MAIL_MAILER=log
+APP_LOCALE=id
+```
+
+7. Buat tabel dan isi data contoh:
+
+```
+php artisan migrate:fresh --seed
+```
+
+8. Jalankan aplikasi:
+
+```
+php artisan serve
+```
+
+9. Buka `http://127.0.0.1:8000/petani/login`.
+
+---
+
+## 3. Akun uji coba
+
+| Peran | Email | Kata sandi |
+|---|---|---|
+| Petani | budi@agritech.test | `<isi sesuai database/seeders/PetaniSeeder.php>` |
+| Admin | admin@agritech.test | `<isi sesuai database/seeders/PetaniSeeder.php>` |
+
+Pendaftar baru lewat `/petani/register` otomatis berperan petani.
+Panel admin belum dibuat, jadi akun admin belum punya halaman sendiri.
+
+---
+
+## 4. Setelah git pull
+
+```
+composer install
+npm install
+php artisan migrate
+php artisan config:clear
+```
+
+Kalau ada migrasi baru dan isi database lokal tidak penting:
+
+```
+php artisan migrate:fresh --seed
+```
+
+Perintah ini MENGHAPUS semua data di database lokal.
+
+---
+
+## 5. Peta folder
+
+| Lokasi | Isinya |
+|---|---|
+| `app/Models` | Model: Petani, Keluhan, Laporan, AksesLaporan, TemplatePrompt |
+| `database/migrations` | Struktur tabel |
+| `database/seeders` | Data contoh |
+| `app/Providers/Filament/PetaniPanelProvider.php` | Pengaturan panel petani (login, daftar, profil, warna) |
+| `app/Filament/Pages/Auth` | Halaman daftar dan profil kustom |
+| `.env.example` | Contoh pengaturan, dibagikan lewat Git |
+| `.env` | Pengaturan pribadi, JANGAN di-commit |
+
+Folder tempat Resource, halaman, dan widget Filament disimpan ditentukan oleh
+baris `discoverResources`, `discoverPages`, dan `discoverWidgets` di
+`PetaniPanelProvider.php`. Perintah `make:filament-...` menaruh file otomatis
+di folder yang sama.
+
+---
+
+## 6. Menambah fitur dengan Filament
+
+Contoh perintah, dijalankan di folder proyek:
+
+```
+php artisan make:filament-resource Keluhan --generate
+php artisan make:filament-page NamaHalaman
+php artisan make:filament-widget NamaWidget
+```
+
+Tambahkan `--help` di belakang perintah untuk melihat pilihan lainnya.
+
+Mengambil petani yang sedang login:
+
+```php
+auth()->user();    // objek Petani
+auth()->id();      // id_petani
+```
+
+Membuat keluhan milik petani yang login:
+
+```php
+auth()->user()->keluhan()->create([ ... ]);
+```
+
+Halaman di dalam panel Filament otomatis wajib login. Rute buatan sendiri di
+luar panel perlu `->middleware('auth')`.
+
+---
+
+## 7. Aturan kerja Git
+
+1. Jangan bekerja langsung di `main`.
+
+2. Satu fitur satu branch, dengan nama `fitur/nama-fitur`:
+
+```
+git checkout main
+git pull
+git checkout -b fitur/nama-fitur
+```
+
+3. Sebelum `composer require` atau perintah pemasangan lain, cek branch:
+
+```
+git branch --show-current
+```
+
+4. Commit kecil dan jelas. Tambahkan folder satu per satu, jangan `git add .`,
+   supaya `.env` dan file yang tidak diinginkan tidak ikut:
+
+```
+git status
+git add app/Models
+git commit -m "Tambah model X"
+```
+
+5. Kirim, lalu buat pull request di GitHub dan minta satu anggota meninjau:
+
+```
+git push -u origin fitur/nama-fitur
+```
+
+6. Jangan mengedit file migrasi lama yang sudah di-merge. Untuk perubahan tabel,
+   buat migrasi baru, lalu kabari tim:
+
+```
+php artisan make:migration tambah_kolom_x_pada_tabel_y --table=y
+```
+
+7. Jangan membagikan `.env`, kunci API, atau kata sandi lewat Git. Untuk
+   pengaturan baru (misalnya kunci layanan AI), tambahkan nama kuncinya dengan
+   nilai kosong di `.env.example`, lalu kabari tim agar mengisinya di `.env`
+   masing-masing.
+
+---
+
+## 8. Catatan untuk tiap peran
+
+**Anggota 1 (keluhan dan AI)** 
+
+- Kunci layanan AI hanya di `.env`. Nama kuncinya ditulis di `.env.example`.
+- Kalau memakai antrean (Queue), jalankan pekerjanya di terminal terpisah:
+note: disesuaikan saja
+
+```
+php artisan queue:work
+```
+
+- Kolom tabel `keluhan` dan nilai `status` perlu disepakati bersama sebelum
+  kode lain bergantung padanya.
+
+**Tim tampilan (Anggota 3 dan 4)**
+
+- Seluruh tampilan petani berada di panel Filament dengan alamat `/petani`.
+- Halaman daftar dan profil sudah ada, tinggal disesuaikan tampilannya.
+- Kalau membuat tema kustom (CSS), jalankan `npm run dev` di terminal terpisah.
+
+---
+
+## 9. Masalah yang sering muncul
+
+| Pesan atau gejala | Penyebab | Perbaikan |
+|---|---|---|
+| `No connection could be made ... 3306` | MySQL belum jalan | Laragon, **Start All** |
+| `Unknown database 'halotani_db'` | Database belum dibuat | Buat di phpMyAdmin |
+| Perubahan `.env` tidak berpengaruh | Pengaturan tersimpan di cache | `php artisan config:clear` |
+| `Class ... not found` | Daftar class belum diperbarui | `composer dump-autoload` |
+| Error kolom atau tabel tidak ada | Migrasi belum dijalankan | `php artisan migrate` |
+| Login gagal | Kata sandi salah, atau data belum di-seed | Cek `PetaniSeeder.php`, lalu `php artisan migrate:fresh --seed` |
+| `Route [login] not defined` | Rute login bawaan Laravel tidak ada | Tambahkan di `routes/web.php`: `Route::redirect('/login', '/petani/login')->name('login');` |
+| `Unable to load dynamic library 'intl'` | Windows memblokir file PHP | PowerShell: `Get-ChildItem <folder php> -Recurse \| Unblock-File` |
+| `npm` diblokir PowerShell | Kebijakan skrip | `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned`, atau pakai cmd |
+
+---
+
+## 10. Status fitur
+
+| Fitur | Status |
+|---|---|
+| Daftar, login, logout, dasbor | Selesai |
+| Lihat dan ubah profil | Selesai |
+| Lupa kata sandi | Dalam perbaikan. Email ditulis ke `storage/logs/laravel.log`, belum terkirim sungguhan |
+| Panel admin, kelola pengguna, kelola template prompt | Belum dikerjakan |
