@@ -35,4 +35,7 @@ return [
         ],
     ],
 
+    'kira' => [
+        'key' => env('KIRA_API_KEY'),
+    ],
 ];
