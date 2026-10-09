@@ -10,16 +10,15 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Filament\Pages\Auth\EditProfile;
-use App\Filament\Pages\Auth\RegisterPetani;
+use App\Filament\Auth\LoginPetani;
+use App\Filament\Auth\RegisterPetani;
+use App\Filament\Auth\EditProfile;
 
 class PetaniPanelProvider extends PanelProvider
 {
@@ -29,12 +28,15 @@ class PetaniPanelProvider extends PanelProvider
             ->default()
             ->id('petani')
             ->path('petani')
-            ->login()
+            ->login(LoginPetani::class)
+            // ->brandName('Agritech Assistant')
+            // ->brandLogo(null)
+            ->darkMode(false)
             ->registration(RegisterPetani::class)
             ->profile(EditProfile::class)
             ->passwordReset()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => '#2E7D32',
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
@@ -42,10 +44,7 @@ class PetaniPanelProvider extends PanelProvider
                 Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
-            ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
-            ])
+            ->widgets([])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
