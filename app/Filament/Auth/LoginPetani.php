@@ -12,6 +12,7 @@ class LoginPetani extends SimplePage implements HasForms
 {
     use InteractsWithForms;
 
+    // HANYA ini yang non-static
     protected string $view = 'filament.pages.auth.login-petani';
 
     public ?array $data = [];
@@ -43,14 +44,13 @@ class LoginPetani extends SimplePage implements HasForms
 
     public function authenticate()
     {
-    $data = $this->form->getState();
+        $data = $this->form->getState();
 
-    // Menggunakan auth standar (guard web -> provider users -> model Petani)
-    if (auth()->attempt(['email' => $data['email'], 'password' => $data['password']], $data['remember'] ?? false)) {
-        session()->regenerate();
-        return redirect()->intended('/petani');
-    }
+        if (auth()->attempt(['email' => $data['email'], 'password' => $data['password']], $data['remember'] ?? false)) {
+            session()->regenerate();
+            return redirect()->intended('/petani');
+        }
 
-    $this->addError('data.email', 'Email atau password yang Anda masukkan salah.');
+        $this->addError('data.email', 'Email atau password yang Anda masukkan salah.');
     }
 }

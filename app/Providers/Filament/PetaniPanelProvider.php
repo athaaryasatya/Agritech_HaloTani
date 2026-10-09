@@ -19,6 +19,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Auth\LoginPetani;
 use App\Filament\Auth\RegisterPetani;
 use App\Filament\Auth\EditProfile;
+
 class PetaniPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -28,11 +29,12 @@ class PetaniPanelProvider extends PanelProvider
             ->id('petani')
             ->path('petani')
             ->login(LoginPetani::class)
+            // ->brandName('Agritech Assistant')
+            // ->brandLogo(null)
             ->darkMode(false)
             ->registration(RegisterPetani::class)
             ->profile(EditProfile::class)
             ->passwordReset()
-            ->darkMode(false)
             ->colors([
                 'primary' => '#2E7D32',
             ])
