@@ -17,7 +17,7 @@ class Keluhan extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
-    protected $fillable = ['id_petani', 'teks_keluhan', 'tanggal', 'status', 'jenis_tanaman'];
+    protected $fillable = ['id_petani','jenis_tanaman', 'urgensi','teks_keluhan', 'tanggal', 'status'];
 
     protected function casts(): array
     {

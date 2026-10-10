@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('id_petani', 50);
 
             $table->string('jenis_tanaman', 50);
+            $table->string('urgensi', 20)->nullable()->default('sedang');
 
             $table->text('teks_keluhan');
             $table->date('tanggal');
