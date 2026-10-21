@@ -52,6 +52,12 @@ class PetaniPanelProvider extends PanelProvider
                     ->sort(3)
                     ->url(fn (): string => filament()->getProfileUrl())
                     ->isActiveWhen(fn (): bool => request()->routeIs('filament.petani.auth.profile')),
+            
+                NavigationItem::make('Manajemen Pupuk')
+                    ->icon('heroicon-o-archive-box')
+                    ->sort(4)
+                    ->url(fn (): string => route('pupuk.index'))
+                    ->isActiveWhen(fn (): bool => request()->routeIs('pupuk.*')),
             ])
             ->renderHook(PanelsRenderHook::HEAD_END, fn () => view('filament.components.sidebar-styles'))
             ->renderHook(PanelsRenderHook::SIDEBAR_FOOTER, fn () => view('filament.components.sidebar-footer'))
