@@ -21,7 +21,7 @@ class Petani extends Authenticatable implements FilamentUser, HasName
     public $incrementing = false;
     protected $keyType = 'string';
 
-    protected $fillable = ['nama', 'email', 'password', 'kontak', 'alamat'];
+   protected $fillable = ['nama', 'email', 'password', 'kontak', 'alamat', 'google_id'];
 
     protected $hidden = ['password', 'remember_token'];
 

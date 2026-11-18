@@ -54,4 +54,14 @@ return [
     'key'   => env('CEREBRAS_API_KEY'),
     'model' => env('CEREBRAS_MODEL', 'gpt-oss-120b'),
     ],
+
+    'bmkg' => [
+    'url' => 'https://api.bmkg.go.id/publik/prakiraan-cuaca',
+    ],
+
+    'google' => [
+    'client_id'     => env('GOOGLE_CLIENT_ID'),
+    'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+    'redirect'      => env('GOOGLE_REDIRECT_URI'),
+    ],
 ];

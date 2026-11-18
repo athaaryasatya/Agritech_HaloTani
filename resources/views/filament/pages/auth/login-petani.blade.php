@@ -17,6 +17,13 @@
         </x-filament::button>
     </form>
 
+    <div style="text-align: center; margin: 1rem 0; color: #6b7280; font-size: 0.875rem;">atau</div>
+
+    <a href="{{ route('auth.google') }}"
+   style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 0.625rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; background: #fff; color: #111827; font-weight: 600; text-decoration: none;">
+    Masuk dengan Google
+    </a>
+
     <div style="text-align: center; margin-margin-top: 1.5rem; font-size: 0.875rem;">
         <span style="color: #4b5563;">Belum memiliki akun Petani? </span>
         
