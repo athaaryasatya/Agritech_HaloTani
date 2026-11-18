@@ -16,11 +16,11 @@ class KirimKeluhan extends Page
 {
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-document-plus';
     protected static ?string $navigationLabel = 'Kirim Keluhan';
-     protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 1;
     protected static ?string $title = 'Kirim Keluhan Tanaman';
     protected string $view = 'filament.pages.kirim-keluhan';
 
-    public string $jenisTanaman = 'misalnya padi';
+    public string $jenisTanaman = '';
     public string $lokasiLahan = '';
     public string $urgensi = 'Sedang';
     public string $deskripsi = '';

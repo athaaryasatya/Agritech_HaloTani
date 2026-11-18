@@ -6,6 +6,7 @@ use App\Models\Keluhan;
 use BackedEnum;
 use Filament\Pages\Page;
 use Illuminate\Database\Eloquent\Collection;
+use Filament\Actions\Action;
 
 class RiwayatAnalisis extends Page
 {
@@ -60,5 +61,17 @@ class RiwayatAnalisis extends Page
         }
 
         return Keluhan::find($this->selectedId);
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('unduhExcel')
+                ->label('Unduh Excel')
+                ->icon('heroicon-o-arrow-down-tray')
+                ->color('success')
+                ->url(fn () => route('export.excel', ['status' => $this->filter]))
+                ->openUrlInNewTab(),
+        ];
     }
 }
