@@ -40,18 +40,22 @@ return [
     ],
 
     'gemini' => [
-    'key' => env('GEMINI_API_KEY'),
-    'model' => env('GEMINI_MODEL', 'gemini-3.5-flash'),
+        'key' => env('GEMINI_API_KEY'),
+        'model' => env('GEMINI_MODEL', 'gemini-3.5-flash'),
     ],
-    
 
     'openrouter' => [
-    'key'   => env('OPENROUTER_API_KEY'),
-    'model' => env('OPENROUTER_MODEL', 'nvidia/nemotron-3-ultra-550b-a55b:free'),
+        'key' => env('OPENROUTER_API_KEY'),
+        'model' => env('OPENROUTER_MODEL', 'nvidia/nemotron-3-ultra-550b-a55b:free'),
     ],
 
     'cerebras' => [
-    'key'   => env('CEREBRAS_API_KEY'),
-    'model' => env('CEREBRAS_MODEL', 'gpt-oss-120b'),
+        'key' => env('CEREBRAS_API_KEY'),
+        'model' => env('CEREBRAS_MODEL', 'gpt-oss-120b'),
+    ],
+
+    'ninerouter' => [
+        'key' => env('NINEROUTER_API_KEY'),
+        'model' => env('NINEROUTER_MODEL', 'cerebras/gpt-oss-120b'),
     ],
 ];

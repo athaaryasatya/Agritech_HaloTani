@@ -3,13 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\pupuk;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class PupukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $pupuks = pupuk::all();
+        $query = pupuk::query();
+        if ($request->filled('search')) {
+            $query->where('nama', 'like', '%'.$request->search.'%');
+        }
+        $pupuks = $query->latest()->get();
+
         return view('pupuk.index', compact('pupuks'));
     }
 
@@ -54,6 +60,25 @@ class PupukController extends Controller
     public function destroy(pupuk $pupuk)
     {
         $pupuk->delete();
+
         return redirect()->route('pupuk.index')->with('success', 'Pupuk berhasil dihapus.');
+    }
+
+    /**
+     * Export data inventaris pupuk ke dokumen PDF menggunakan Barryvdh\DomPDF
+     */
+    public function exportPdf(Request $request)
+    {
+        $pupuks = pupuk::all();
+        $tanggal = now()->format('d-m-Y H:i:s');
+
+        $pdf = Pdf::loadView('pupuk.pdf', compact('pupuks', 'tanggal'))
+            ->setPaper('a4', 'portrait');
+
+        if ($request->has('stream')) {
+            return $pdf->stream('laporan-inventaris-pupuk.pdf');
+        }
+
+        return $pdf->download('laporan-inventaris-pupuk.pdf');
     }
 }

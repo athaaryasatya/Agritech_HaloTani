@@ -1,34 +1,29 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Pupuk</title>
-    <style>
-        body { font-family: sans-serif; margin: 30px; background-color: #f9f9f9; }
-        .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input, select { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
-        .error-msg { color: #d32f2f; font-size: 13px; margin-top: 4px; }
-        .btn { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; }
-        .btn-green { background: #2e7d32; color: white; }
-        .btn-gray { background: #757575; color: white; }
-    </style>
-</head>
-<body>
-<div class="container">
-    <h2>Tambah Data Pupuk</h2>
+@extends('layouts.app')
+
+@section('title', 'Tambah Pupuk - Agritech')
+
+@push('styles')
+<style>
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.875rem; color: #374151; }
+    input, select { width: 100%; padding: 8px 12px; box-sizing: border-box; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.875rem; }
+    .error-msg { color: #d32f2f; font-size: 13px; margin-top: 4px; }
+    .btn { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; text-decoration: none; font-size: 0.875rem; }
+    .btn-green { background: #2e7d32; color: white; }
+    .btn-gray { background: #6b7280; color: white; }
+</style>
+@endpush
+
+@section('content')
+<div class="card" style="max-width: 550px;">
+    <h2 style="margin-bottom: 20px; font-size: 1.25rem;">Tambah Data Pupuk</h2>
 
     <form action="{{ route('pupuk.store') }}" method="POST">
-        {{-- Syarat ETS: Form Protection @csrf --}}
         @csrf
 
         <div class="form-group">
             <label>Nama Pupuk</label>
-            {{-- Syarat ETS: Retensi masukan old() --}}
             <input type="text" name="nama" value="{{ old('nama') }}" placeholder="cth: Urea Nitro">
-            {{-- Syarat ETS: Penanganan error $errors --}}
             @error('nama') <div class="error-msg">{{ $message }}</div> @enderror
         </div>
 
@@ -55,9 +50,10 @@
             @error('satuan') <div class="error-msg">{{ $message }}</div> @enderror
         </div>
 
-        <button type="submit" class="btn btn-green">Simpan</button>
-        <a href="{{ route('pupuk.index') }}" class="btn btn-gray">Kembali</a>
+        <div style="display: flex; gap: 8px; margin-top: 20px;">
+            <button type="submit" class="btn btn-green">Simpan</button>
+            <a href="{{ route('pupuk.index') }}" class="btn btn-gray">Kembali</a>
+        </div>
     </form>
 </div>
-</body>
-</html>
+@endsection

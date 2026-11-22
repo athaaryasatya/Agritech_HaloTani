@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Petani extends Authenticatable implements FilamentUser, HasName
 {
-    use HasUuids, Notifiable;
+    use HasApiTokens, HasUuids, Notifiable;
 
     const UPDATED_AT = null;
 
